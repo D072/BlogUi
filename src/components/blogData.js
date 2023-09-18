@@ -7,6 +7,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { MDBContainer } from 'mdb-react-ui-kit';
+import api  from '../Services';
 
 
 const BlogData = () => {
@@ -23,7 +24,7 @@ const BlogData = () => {
     const getData = () => {
     let token = localStorage.getItem("ADtoken")
 
-      axios.get('http://localhost:3000/blog/allData', { headers: { token: token } })
+      axios.get(api + '/blog/allData', { headers: { token: token } })
           .then(function (response) {
               setData(response.data.data);
           })
@@ -33,7 +34,7 @@ const BlogData = () => {
   }
   useEffect(() => {
     getData()
-    axios.get('http://localhost:3000/category/allCategory', { headers: { token: token } })
+    axios.get(api + '/category/allCategory', { headers: { token: token } })
         .then(function (response) {
             let copyArray = []
             for (let i = 0; i < response.data.data.length; i++) {
@@ -60,13 +61,15 @@ const BlogData = () => {
   const handleSubmit = () => {
 
     const formData = new FormData();
+    
     formData.append('title', title)
     formData.append('description', description)
     formData.append('category', category)
     formData.append('blogImage', blogImage)
+
     if (id) {
         try {
-            axios.patch("http://localhost:3000/blog/update?id="+id, formData, { headers: { token: token } })
+            axios.patch(api + "/blog/update?id="+id, formData, { headers: { token: token } })
                 .then(function (response) {
                     console.log(response);
                     getData()
@@ -79,7 +82,7 @@ const BlogData = () => {
         }
     }else{
         try {
-            axios.post("http://localhost:3000/blog/create", formData, { headers: { token: token } })
+            axios.post(api + "/blog/create", formData, { headers: { token: token } })
                 .then(function (response) {
                     getData()
                 })
@@ -97,7 +100,7 @@ const BlogData = () => {
     setID("")
 }
 const handleDelete = (index, id) => {
-  axios.delete("http://localhost:3000/blog/delete?id=" + id, { headers: { token: token } })
+  axios.delete(api + "/blog/delete?id=" + id, { headers: { token: token } })
       .then(function (response) {
           getData()
       })
@@ -166,7 +169,7 @@ const handleEdit = (index, id) => {
                         <Card sx={{ maxWidth: 400 }} className='col-md-4 p-2'>
                           <CardMedia
                             sx={{ height: 240 }}
-                            image={'http://localhost:3000/blog/' + el.blogImage}
+                            image={api + '/blog/' + el.blogImage}
                             title="green iguana"
                           />
                           <CardContent>

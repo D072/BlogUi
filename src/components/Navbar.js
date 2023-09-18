@@ -12,6 +12,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import SideBar from "./SideBar";
 import { SearchData } from './SearchContext';
+import  api from '../Services';
 
 const Navbar = () => {
     let data = useContext(SearchData)
@@ -20,7 +21,7 @@ const Navbar = () => {
     let ad = localStorage.getItem("token")
   
     const getData = () => {
-      axios.get('http://localhost:3000/blog/allData', { headers: { token: token } })
+      axios.get(api + '/blog/allData', { headers: { token: token } })
           .then(function (response) {
               data.setData(response.data.data);
           })
@@ -32,7 +33,7 @@ const Navbar = () => {
       setSearch(values)
   
       if(values){
-        await axios.get('http://localhost:3000/searchData?search='+values)
+        await axios.get(api + '/searchData?search='+values)
         .then(function (response) {
           console.log(response);
           data.setData(response.data.data)

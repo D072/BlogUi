@@ -12,6 +12,7 @@ import {
   }from 'mdb-react-ui-kit';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom'
+import api from '../Services';
 
 const Login = () => {
     const [justifyActive, setJustifyActive] = useState('tab1');
@@ -49,7 +50,7 @@ const Login = () => {
             username : userName,
             password : pass
           }
-          const res = await axios.post("http://localhost:3000/register", OBJ)            
+          const res = await axios.post(api + "/register", OBJ)            
           localStorage.setItem('token', res.data.token)
           setFname('')
           setEmail('')
@@ -77,7 +78,7 @@ const Login = () => {
               username : loguserName,
               password : logpass
           }
-          const res = await axios.post("http://localhost:3000/login", OBJ)
+          const res = await axios.post(api + "/login", OBJ)
           
           localStorage.setItem('token', res.data.token)
           localStorage.setItem('fname', res.data.data.fname)

@@ -14,7 +14,6 @@ import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
 import { useHistory } from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
 import { deepOrange, deepPurple } from '@mui/material/colors';
-import axios from 'axios';
 
 
 const SideBar = () => {

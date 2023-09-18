@@ -11,6 +11,7 @@ import {
   MDBCol
 } from 'mdb-react-ui-kit';
 import { SearchData } from './SearchContext';
+import api  from '../Services';
 
 const HomeData = () => {
   // const [data , setData] = useState([])
@@ -18,7 +19,7 @@ const HomeData = () => {
   let data = useContext(SearchData)
 
   const getData = () => {
-    axios.get('http://localhost:3000/blog/allData', { headers: { token: token } })
+    axios.get(api + '/blog/allData', { headers: { token: token } })
       .then(function (response) {
         console.log("response", response.data.data);
         data.setData(response.data.data);
@@ -34,11 +35,12 @@ const HomeData = () => {
     <>
       {
         data.data.map((el, index) => {
+          console.log(el)
           return (
             <MDBCol className='col-md-4 p-2'>
-              <Link exact to={'/detail/' + el.id}>
+              <Link exact to={'/detail/' + el._id}>
                 <MDBCard>
-                  <MDBCardImage src={'http://localhost:3000/blog/' + el.blogImage} position='top' alt='...' />
+                  <MDBCardImage src={api + '/blog/' + el.blogImage} position='top' alt='...' />
                   <MDBCardBody>
                     <MDBCardTitle>{el.title}</MDBCardTitle>
                     <span className='cateGory'>{el.category.category}</span>

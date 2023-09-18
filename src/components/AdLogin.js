@@ -12,6 +12,7 @@ import {
   }from 'mdb-react-ui-kit';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom'
+import api from '../Services'
 
 const AdLogin = () => {
     const [justifyActive, setJustifyActive] = useState('tab1');
@@ -46,7 +47,7 @@ const AdLogin = () => {
               username : loguserName,
               password : logpass
           }
-          const res = await axios.post("http://localhost:3000/admin/login", OBJ)
+          const res = await axios.post(api + '/admin/login', OBJ)
           localStorage.setItem('ADtoken', res.data.token)
           localStorage.removeItem('token')
           return history.push('/admin/home')

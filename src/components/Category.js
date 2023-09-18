@@ -1,5 +1,6 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import api  from '../Services'
 
 const Category = () => {
 
@@ -12,7 +13,7 @@ const Category = () => {
 
     const getData = async () => {
 
-        await axios.get('http://localhost:3000/category/allCategory',{ headers: { token: token } })
+        await axios.get(api + '/category/allCategory',{ headers: { token: token } })
             .then(function (response) {
                 setData(response.data.data);
             })
