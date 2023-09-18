@@ -1,3 +1,3 @@
-const api = "https://blog-api-live.vercel.app"
+const api = "https://nice-lime-walkingstick-hem.cyclic.cloud"
 
 export default api ;
